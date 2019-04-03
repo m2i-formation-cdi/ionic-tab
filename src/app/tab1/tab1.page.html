@@ -4,9 +4,41 @@
       Tab One
     </ion-title>
   </ion-toolbar>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-select placeholder="le genre" 
+        [(ngModel)]="genderChoice">
+          <ion-select-option value="female">Féminin</ion-select-option>
+          <ion-select-option value="male">Masculin</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col>
+          <ion-select placeholder="les nationalités" multiple="true" 
+          [(ngModel)]="nationalityChoice">
+            <ion-select-option value="fr">Française</ion-select-option>
+            <ion-select-option value="gb">Anglaise</ion-select-option>
+            <ion-select-option value="ie">Irlandaise</ion-select-option>
+            <ion-select-option value="es">Espagnole</ion-select-option>
+            <ion-select-option value="dk">Danoise</ion-select-option>
+            <ion-select-option value="ir">Iranienne</ion-select-option>
+            <ion-select-option>Allemande</ion-select-option>
+          </ion-select>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+        <ion-refresher-content 
+        refreshingText="Chargement en cours ..."
+        refreshingSpinner="bubbles"
+        ></ion-refresher-content>
+    </ion-refresher>
+
     <ion-list>
       <ion-item *ngFor="let user of userList">
 

@@ -10,6 +10,10 @@ export class Tab1Page {
 
   public userList:Array<any> = [];
 
+  public genderChoice:string = 'female';
+
+  public nationalityChoice:string[] = ['fr'];
+
   constructor(private http: HttpClient) { 
     this.loadData(false, null);
   }
@@ -18,9 +22,9 @@ export class Tab1Page {
   private loadData(addBeforeContent:boolean, even) {
     let url = "https://randomuser.me/api";
     let requestParams = new HttpParams()
-      .set('results', '500')
-      .set('gender', 'male')
-      .set('nat', 'fr,es,de');
+      .set('results', '10')
+      .set('gender', this.genderChoice)
+      .set('nat', this.nationalityChoice.join(','));
     let req = this.http.get(url, { params: requestParams });
     req.subscribe((data: any) => {
       if(addBeforeContent){
@@ -39,5 +43,9 @@ export class Tab1Page {
 
   public loadMoreData(even){
     this.loadData(false, even)
+  }
+
+  public refreshData(even){
+    this.loadData(true, even);
   }
 }
