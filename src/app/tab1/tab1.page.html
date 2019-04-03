@@ -9,7 +9,18 @@
 <ion-content>
     <ion-list>
       <ion-item *ngFor="let user of userList">
+
+          <ion-avatar slot="start">
+            <ion-img src="{{user.picture.large}}"></ion-img>
+          </ion-avatar>
+
         <p>{{ user.name.title }} {{ user.name.first }} {{user.name.last }}</p>
       </ion-item>
     </ion-list>
+
+    <ion-infinite-scroll treshold="10%" (ionInfinite)="loadMoreData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Veuillez patienter pendant la triangulation des pyramides">
+
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
